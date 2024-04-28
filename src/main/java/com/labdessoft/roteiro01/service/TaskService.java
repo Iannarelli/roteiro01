@@ -10,30 +10,36 @@ import org.springframework.stereotype.Service;
 import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Optional;
-import java.util.UUID;
 
 @Service
 @AllArgsConstructor
 public class TaskService {
     private TaskRepository taskRepository;
 
-    public List<Task> findAllByDispositivoId(UUID dispositivoId) {
+    public List<Task> findAllByDispositivoId(String dispositivoId) {
         return taskRepository.findAllByDispositivoId(dispositivoId);
     }
 
-    public Optional<Task> findByDispositivoIdAndId(UUID dispositivoId, Long id) {
+    public Optional<Task> findById(int id) {
+        return taskRepository.findById(id);
+    }
+
+    public Optional<Task> findByDispositivoIdAndId(String dispositivoId, Long id) {
         return taskRepository.findByDispositivoIdAndId(dispositivoId, id);
     }
 
-    public Task createTask(UUID dispositivoId, Task task) {
-        task.setDispositivoId(dispositivoId);
+    public Task createTask(Task task) {
         task.setCreatedAt(LocalDateTime.now());
         task.setUpdatedAt(LocalDateTime.now());
         return taskRepository.save(task);
     }
 
-    public Task updateTask(Task existingTask, String descricao) {
-        existingTask.setDescricao(descricao);
+    public Task updateTask(Task existingTask, Task task) {
+        existingTask.setDescricao(task.getDescricao());
+        existingTask.setPrazoDias(task.getPrazoDias());
+        existingTask.setDataLimite(task.getDataLimite());
+        existingTask.setPrioridade(task.getPrioridade());
+        existingTask.setConcluida(task.getConcluida());
         existingTask.setUpdatedAt(LocalDateTime.now());
         return taskRepository.save(existingTask);
     }

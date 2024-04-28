@@ -1,0 +1,11 @@
+@startuml ToDoList - Lab de Des de Soft
+!include https://raw.githubusercontent.com/plantuml-stdlib/c4-PlantUML/master/C4_Container.puml
+title ToDoList - Backend - Diagrama de Contexto (Level 1)
+
+Person(user, 'Usuário APP')
+System_Ext(front, 'Frontend do ToDoList')
+System(back, 'Backend do ToDoList')
+
+Rel(user, front, 'Acessa o Frontend versão Web')
+Rel(front, back, 'HTTP Request')
+@enduml
