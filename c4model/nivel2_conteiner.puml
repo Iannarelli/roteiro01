@@ -1,0 +1,23 @@
+@startuml ToDoList - Lab de Des de Soft
+!include https://raw.githubusercontent.com/plantuml-stdlib/c4-PlantUML/master/C4_Container.puml
+
+!define DEVICONS https://raw.githubusercontent.com/tupadr3/plantuml-icon-font-sprites/master/devicons
+!define FONTAWESOME https://raw.githubusercontent.com/tupadr3/plantuml-icon-font-sprites/master/font-awesome-5
+!include DEVICONS/java.puml
+!include FONTAWESOME/users.puml
+
+LAYOUT_WITH_LEGEND()
+
+title ToDoList - Backend - Diagrama de Conteiner (Nível 2)
+
+Person(user, 'Usuários', $sprite="users")
+Boundary(sys, 'Aplicação Web', 'Sistema') {
+    Container(back, 'Backend API', $descr='Aplicação frontend para gerenciamento de tarefas pelos usuários', $techn='Java / Spring Boot')
+    Container_Ext(front, 'Frontend', $descr='Aplicação frontend para gerenciamento de tarefas pelos usuários')
+    ContainerDb(h2, 'H2 Database', 'Armazena dados das tarefas', $techn='Banco de Dados SQL')
+}
+
+Rel(user, front, 'Acessa versão Web', 'HTTPS')
+Rel(front, back, 'Faz requisições de API', 'JSON/HTTPS')
+Rel(back, h2, 'Leitura e escrita', 'Spring Data JPA')
+@enduml

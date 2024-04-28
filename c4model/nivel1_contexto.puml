@@ -1,0 +1,19 @@
+@startuml ToDoList - Lab de Des de Soft
+!include https://raw.githubusercontent.com/plantuml-stdlib/c4-PlantUML/master/C4_Context.puml
+
+!define DEVICONS https://raw.githubusercontent.com/tupadr3/plantuml-icon-font-sprites/master/devicons
+!define FONTAWESOME https://raw.githubusercontent.com/tupadr3/plantuml-icon-font-sprites/master/font-awesome-5
+!include DEVICONS/java.puml
+!include FONTAWESOME/users.puml
+
+LAYOUT_WITH_LEGEND()
+
+title ToDoList - Backend - Diagrama de Contexto (Nível 1)
+
+Person(user, 'Usuários', $sprite="users")
+System_Ext(front, 'Frontend', 'Aplicação frontend para gerenciamento de tarefas pelos usuários')
+System(back, 'Backend API', 'Aplicação backend que trata as regras de negócio', $sprite="java", $type="Java / Spring Boot")
+
+Rel(user, front, 'Acessa versão Web', 'HTTPS')
+Rel(front, back, 'Faz requisições de API', 'JSON/HTTPS')
+@enduml

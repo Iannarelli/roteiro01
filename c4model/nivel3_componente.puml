@@ -1,0 +1,23 @@
+@startuml ToDoList - Lab de Des de Soft
+!include https://raw.githubusercontent.com/plantuml-stdlib/c4-PlantUML/master/C4_Container.puml
+!include https://raw.githubusercontent.com/plantuml-stdlib/c4-PlantUML/master/C4_Component.puml
+
+LAYOUT_WITH_LEGEND()
+
+title ToDoList - Backend - Diagrama de Componentes (Level 3)
+
+Component_Ext(front, 'Frontend', $descr='Aplicação frontend para gerenciamento de tarefas pelos usuários')
+
+Boundary('back', 'Backend API', 'Java / Spring Boot') {
+    Component(controller, 'TaskController', $descr='Mapeia as rotas, recebe e trata as requisições e retorna as devidas respostas')
+    Component(service, 'TaskService', $descr='Contém as regras de negócio')
+    Component(repository, 'TaskRepository', , $descr='Encapsula o acesso ao banco de dados e oferece interface para interação com a fonte de dados')
+}
+
+ContainerDb(h2, 'H2 Database', 'Armazena dados das tarefas', $techn='Banco de Dados SQL')
+
+Rel(front, controller, 'Faz requisições de API', 'JSON/HTTPS')
+Rel(controller, service, 'Chamadas internas')
+Rel(service, repository, 'Chamadas internas')
+Rel(repository, h2, 'Leitura e escrita', 'Spring Data JPA')
+@enduml
