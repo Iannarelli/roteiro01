@@ -14,7 +14,8 @@ EXPOSE 8080
 COPY --from=build target/roteiro01-0.0.1-SNAPSHOT.jar app.jar
 
 # Variáveis de ambiente para acesso ao banco de dados PostgreSQL
-ENV DB_URL=jdbc:postgres://admin:tjBsnHsIkJghzWxyksEpEiSqrzHzhxw0@dpg-coomtvm3e1ms73b8vdeg-a/todolist_i0j7
+ENV DB_URL=jdbc:postgres://dpg-coomtvm3e1ms73b8vdeg-a
+ENV DB_DATABASE=todolist_i0j7
 ENV DB_USERNAME=admin
 ENV DB_PASSWORD=tjBsnHsIkJghzWxyksEpEiSqrzHzhxw0
 
