@@ -96,11 +96,10 @@ alt try
         activate pagedResourcesAssembler
         pagedResourcesAssembler --> TaskController: PagedModel<Task> resource
         destroy pagedResourcesAssembler
-        TaskController --> SpringBoot: ResponseEntity.ok(List<Task>)
+    TaskController --> SpringBoot: ResponseEntity.ok(List<Task>)
     end
 else catch Exception
     TaskController --> SpringBoot: ResponseEntity.badRequest().build()
-end
 destroy TaskController
 end
 SpringBoot --> Frontend: ResponseEntity

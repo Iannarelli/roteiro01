@@ -63,46 +63,43 @@ Boundary TypedQuery
 Database ToDoList
 
 activate SpringBoot
-Usuário -> Frontend: Detalhes de uma tarefa
+Usuário -> Frontend: Cria uma nova tarefa
 activate Usuário
 activate Frontend
 activate ToDoList
-Frontend -> SpringBoot: GET api/task/{id}
+Frontend -> SpringBoot: POST api/task/
 group Roteiro01Application [Spring Boot Java Application]
-SpringBoot -> TaskController: getById(id, request, response, Pageable, PersistentEntityResourceAssembler)
+SpringBoot -> TaskController: createTask(task, request, response, Pageable, PersistentEntityResourceAssembler)
 activate TaskController
+activate Task
 alt try
     TaskController -> TaskController: getUUID(request, response)
-    TaskController -> TaskService: findByDispositivoIdAndId(dispositivoId, id, pageable)
+    TaskController -> Task: setDispositivoId(dispositivoId)
+    TaskController -> TaskService: createTask(task, pageable)
     activate TaskService
-    TaskService -> TaskRepository: findByDispositivoIdAndId(dispositivoId, id, pageable)
+
+    TaskService -> Task: setCreatedAt(LocalDateTime.now())
+    TaskService -> Task: setUpdatedAt(LocalDateTime.now())
+    TaskService -> TaskRepository: save(task);
     activate TaskRepository
-    TaskRepository -> TypedQuery: findByDispositivoIdAndId(dispositivoId, id, TaskDto)
+    TaskRepository -> TypedQuery: save(task)
     group JPA Framework
     activate TypedQuery
-    TypedQuery -> ToDoList: SELECT * FROM Tasks WHERE dispositivoId = dispositivoId AND id = id
+    TypedQuery -> ToDoList: INSERT INTO Tasks (dispositivoId, descricao, isConcluida, prazoDias, dataLimite, prioridade, createdAt, updatedAt, tipo) VALUES (dispositivoId, descricao, isConcluida, prazoDias, dataLimite, prioridade, createdAt, updatedAt, tipo)
     ToDoList --> TypedQuery: Table Tasks
-    TypedQuery --> TaskRepository: Optional<Task>
+    TypedQuery --> TaskRepository: Task
     destroy TypedQuery
     end
-    TaskRepository --> TaskService: Optional<Task>
+    TaskRepository --> TaskService: Task
     destroy TaskRepository
-    TaskService --> TaskController: Optional<Task> events
+    TaskService --> TaskController: Task events
     destroy TaskService
-    alt Task == null
-        TaskController --> SpringBoot: ResponseEntity.notFound().build()
-    else Task exists
-        TaskController -> pagedResourcesAssembler: toModel(events, resourceAssembler)
-        activate pagedResourcesAssembler
-        pagedResourcesAssembler --> TaskController: PagedModel<Task> resource
-        destroy pagedResourcesAssembler
-        TaskController --> SpringBoot: ResponseEntity.ok(List<Task>)
-    end
+    TaskController --> SpringBoot: ResponseEntity.ok(Task)
 else catch Exception
     TaskController --> SpringBoot: ResponseEntity.badRequest().build()
 end
 destroy TaskController
 end
 SpringBoot --> Frontend: ResponseEntity
-Frontend --> Usuário: List<Task>
+Frontend --> Usuário: Task
 @enduml
