@@ -92,7 +92,7 @@ export const TodoList = ({ task, onToggleCompleted, onUpdateTaskDescription, onD
             />
             <div className={`${task.completed ? "completed" : "incompleted"} w-100`}>
                 <div className='d-flex'>
-                    {!isEditing ? (
+                    {isEditing ? (
                         <input
                             id="editInput"
                             type="text"
