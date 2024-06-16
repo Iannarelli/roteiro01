@@ -6,11 +6,16 @@ import { TodoList } from './TodoList';
 import { v4 as uuidv4 } from "uuid";
 
 export const TodoWrapper = () => {
-    const [todos, setTodos] = useState([
-        {id: 1, descricao: 'Tarefa exemplo', completed: false}
-    ]);
+    const [todos, setTodos] = useState([]);
 
     const addTodo = (descricao, deadlineType, days, date, priority) => {
+        if (deadlineType === 'prazo' && days !== '' && date === '') {
+            const now = new Date();
+            date = new Date(now.getFullYear(), now.getMonth(), now.getDate() + parseInt(days));
+        }
+        if (deadlineType === 'data_limite' && date !== '') {
+            date = new Date(date.split('-')[0], parseInt(date.split('-')[1]) - 1, date.split('-')[2]);
+        }
         setTodos([
             ...todos,
             {

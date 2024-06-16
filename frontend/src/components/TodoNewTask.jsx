@@ -49,7 +49,7 @@ export const TodoNewTask = ({addTodo}) => {
                         priority,
                     });
                     addTodo(descricao, deadlineType, days, date, priority);
-                    // Limpar o estado
+
                     setDescricao('');
                     setDeadlineType('');
                     setDays('');
@@ -114,7 +114,7 @@ export const TodoNewTask = ({addTodo}) => {
                                 className='days-input'
                                 disabled={deadlineType !== 'prazo'}
                             />
-                            <label htmlFor='dias'>&nbsp;dias</label>
+                            <label htmlFor='dias'>&nbsp;dia(s)</label>
                         </div>
                     </div>
                     <div className='d-flex justify-content-between mb-3'>

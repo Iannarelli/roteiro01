@@ -125,7 +125,7 @@ h1 {
 }
 
 .Todo {
-    background: #f0f0f0;
+    background: green;
     border-radius: 5px;
     padding: 15px;
     width: calc(33.333% - 14px);
@@ -133,22 +133,42 @@ h1 {
     display: flex;
 }
 
+.Todo.media {
+    background-color: yellow;
+}
+
+.Todo.alta {
+    background-color: red;
+}
+
+.Todo.atrasado {
+    background-image: linear-gradient(to right, yellow, red);
+}
+
 .Todo input[type=checkbox] {
     height: min-content;
     margin: 7px 10px 0px 0px;
 }
 
+.Todo div {
+    text-align: left;
+}
+
 .Todo p {
     margin: 0;
+    color: white;
+}
+
+.Todo.media p, .Todo.atrasado p {
+    color: black;
+}
+
+.Todo .completed p {
+    color: #888;
 }
 
 .completed {
     text-decoration: line-through;
-    color: #888;
-}
-
-.incompleted {
-    color: #333;
 }
 
 input[type=radio] {
@@ -188,4 +208,8 @@ select {
 
 .card {
     border-color: #8758ff !important;
+}
+
+.exclamacao {
+    margin-left: auto;
 }
