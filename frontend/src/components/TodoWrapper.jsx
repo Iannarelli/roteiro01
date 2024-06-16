@@ -37,6 +37,18 @@ export const TodoWrapper = () => {
         setTodos(updatedTasks);
     };
 
+    const updateTaskDescription = (taskId, newDescription) => {
+        const updatedTasks = todos.map(task =>
+            task.id === taskId ? { ...task, descricao: newDescription } : task
+        );
+        setTodos(updatedTasks);
+    };
+
+    const deleteTask = (taskId) => {
+        const updatedTasks = todos.filter(task => task.id !== taskId);
+        setTodos(updatedTasks);
+    };
+
     const tarefasPendentes = todos.filter(todo => !todo.completed);
     const tarefasConcluidas = todos.filter(todo => todo.completed);
 
@@ -51,6 +63,8 @@ export const TodoWrapper = () => {
                         key = {item.id}
                         task = {item}
                         onToggleCompleted={handleToggleCompleted}
+                        onUpdateTaskDescription={updateTaskDescription}
+                        onDeleteTask={deleteTask}
                     />
                 )}
             </div>
@@ -61,6 +75,8 @@ export const TodoWrapper = () => {
                         key = {item.id}
                         task = {item}
                         onToggleCompleted={handleToggleCompleted}
+                        onUpdateTaskDescription={updateTaskDescription}
+                        onDeleteTask={deleteTask}
                     />
                 )}
             </div>

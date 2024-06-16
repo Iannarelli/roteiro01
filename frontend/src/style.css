@@ -47,15 +47,8 @@ h1 {
     border-bottom: 1px solid #8758ff;
     padding: 0.5rem 1rem;
     margin-bottom: 1rem;
-    width: 300px;
+    width: -webkit-fill-available;
 }
-
-/* .todo-input {
-    flex: 1;
-    padding: 10px;
-    font-size: 16px;
-    margin-right: 10px;
-} */
 
 .todo-input::placeholder {
     color: gray;
@@ -212,4 +205,68 @@ select {
 
 .exclamacao {
     margin-left: auto;
+    padding-left: 10px;
+}
+
+#editInput {
+    outline: none;
+}
+
+.modal {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    right: auto;
+    bottom: auto;
+    margin-right: -50%;
+    transform: translate(-50%, -50%);
+    background: white;
+    padding: 20px;
+    border-radius: 4px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    z-index: 1000;
+}
+
+.overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: rgba(0, 0, 0, 0.75);
+    z-index: 999;
+}
+
+.modal-dialog {
+    position: fixed !important;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: auto !important;
+    margin: 0;
+    background-color: white;
+    padding: 15px 25px;
+    border-radius: 5px;
+    outline: none;
+}
+
+.modal-backdrop {
+    background-color: rgba(0, 0, 0, 0.5) !important;
+}
+
+.modal-header {
+    justify-content: center;
+    margin-bottom: 1rem;
+    text-decoration: underline;
+}
+
+.modal-header .close {
+    border: none;
+    position: absolute;
+    right: 0px;
+    top: 0px;
+}
+
+.modal-footer button {
+    margin-left: 5px;
 }
