@@ -46,8 +46,7 @@ h1 {
     border: none;
     border-bottom: 1px solid #8758ff;
     padding: 0.5rem 1rem;
-    margin-top: 1rem;
-    margin-bottom: 2rem;
+    margin-bottom: 1rem;
     width: 300px;
 }
 
@@ -122,16 +121,21 @@ h1 {
 .TodoContainer {
     display: flex;
     flex-wrap: wrap;
-    gap: 20px;
-    justify-content: space-between;
+    gap: 21px;
 }
 
 .Todo {
     background: #f0f0f0;
     border-radius: 5px;
     padding: 15px;
-    width: calc(33.333% - 20px);
+    width: calc(33.333% - 14px);
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    display: flex;
+}
+
+.Todo input[type=checkbox] {
+    height: min-content;
+    margin: 7px 10px 0px 0px;
 }
 
 .Todo p {
@@ -145,4 +149,43 @@ h1 {
 
 .incompleted {
     color: #333;
+}
+
+input[type=radio] {
+    margin-right: 5px;
+}
+
+.days-input {
+    outline: none;
+    background: none;
+    border: none;
+    border-bottom: 1px solid #8758ff;
+    padding: 0rem 0.5rem;
+    max-width: 50px;
+    text-align: right;
+}
+
+.date-input {
+    outline: none;
+    background: none;
+    border: none;
+    border-bottom: 1px solid #8758ff;
+    text-align: center;
+}
+
+input[type=number]::-webkit-inner-spin-button, 
+input[type=number]::-webkit-outer-spin-button {
+    -webkit-appearance: none;
+}
+
+input[type=number] {
+    -moz-appearance: textfield;
+}
+
+select {
+    outline: none;
+}
+
+.card {
+    border-color: #8758ff !important;
 }
