@@ -270,3 +270,12 @@ select {
 .modal-footer button {
     margin-left: 5px;
 }
+
+.editing {
+    background-image: none !important;
+    background-color: transparent !important;
+}
+
+.editing label {
+    color: black !important;
+}

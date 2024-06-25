@@ -37,10 +37,29 @@ export const TodoWrapper = () => {
         setTodos(updatedTasks);
     };
 
-    const updateTaskDescription = (taskId, newDescription) => {
+    const updateTask = (taskId, newDescription, deadlineType, days, date, priority) => {
+        console.log('taskid: ' , taskId, '\nnewDescription: ', newDescription, '\ndeadlineType: ', deadlineType,
+            '\ndays: ', days, '\ndate: ', date, '\npriority: ', priority);
+        if (deadlineType === 'prazo' && days !== '' && date === '') {
+            const now = new Date();
+            date = new Date(now.getFullYear(), now.getMonth(), now.getDate() + parseInt(days));
+        }
+        if (deadlineType === 'data_limite' && date !== '') {
+            date = new Date(date.split('-')[0], parseInt(date.split('-')[1]) - 1, date.split('-')[2]);
+        }
+        console.log('taskid: ' , taskId, '\nnewDescription: ', newDescription, '\ndeadlineType: ', deadlineType,
+            '\ndays: ', days, '\ndate: ', date, '\npriority: ', priority);
         const updatedTasks = todos.map(task =>
-            task.id === taskId ? { ...task, descricao: newDescription } : task
+            task.id === taskId ? {
+                ...task,
+                descricao: newDescription,
+                deadlineType: deadlineType,
+                days: days,
+                date: date,
+                priority: priority
+            } : task
         );
+        console.log(updatedTasks);
         setTodos(updatedTasks);
     };
 
@@ -63,7 +82,7 @@ export const TodoWrapper = () => {
                         key = {item.id}
                         task = {item}
                         onToggleCompleted={handleToggleCompleted}
-                        onUpdateTaskDescription={updateTaskDescription}
+                        onUpdateTask={updateTask}
                         onDeleteTask={deleteTask}
                     />
                 )}
@@ -75,7 +94,7 @@ export const TodoWrapper = () => {
                         key = {item.id}
                         task = {item}
                         onToggleCompleted={handleToggleCompleted}
-                        onUpdateTaskDescription={updateTaskDescription}
+                        onUpdateTask={updateTask}
                         onDeleteTask={deleteTask}
                     />
                 )}
